@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+*.pyc
 
 # Precompiled Headers
 *.gch
@@ -15,10 +16,6 @@
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
 
 # Compiled Static libraries
 *.lai
@@ -30,3 +27,10 @@
 *.exe
 *.out
 *.app
+bin/*
+
+# build dir
+build/
+
+# temporary files
+*~
