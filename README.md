@@ -84,6 +84,13 @@ for( auto & page : myNotebook.pages )
                 std::cout << point.x << " " << point.y << std::endl;
 ```
 
+## Resources
+
+Blog articles
+
+- [general](https://plasma.ninja/blog/devices/remarkable/2017/12/18/reMarkable-exporation.html)
+- [file format](https://plasma.ninja/blog/devices/remarkable/binary/format/2017/12/26/reMarkable-lines-file-format.html)
+
 ## Disclaimer
 
 This is a hobby project.
