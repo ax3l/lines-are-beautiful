@@ -51,6 +51,8 @@ lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
 
 Try it on your own files inside `$HOME/.local/share/remarkable/xochitl/` :-)
 
+Note: this tool depends on an installed [PNGwriter](https://github.com/pngwriter/pngwriter) dependency.
+
 ## Usage API
 
 Set environment hints:

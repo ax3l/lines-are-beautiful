@@ -42,13 +42,6 @@ target_include_directories(Rmlab PUBLIC
 )
 set_target_properties(Rmlab PROPERTIES CXX_STANDARD 14)
 
-# tools / executables
-#add_executable(lines2png
-#    include/rmlab/renderer/lines2png.cpp
-#)
-#
-#set_property(TARGET lines2png PROPERTY CXX_STANDARD 14)
-
 
 # Dependencies ################################################################
 #
@@ -57,13 +50,23 @@ if(NOT WIN32)
     target_link_libraries(Rmlab PUBLIC m)
 endif()
 
-#find_package(PNGwriter)
+find_package(PNGwriter)
 
-#target_link_libraries(lines2png PRIVATE
-#    Rmlab
-#    ${PNGwriter_LIBRARIES}
-#)
-#target_include_directories(lines2png SYSTEM PRIVATE ${PNGwriter_INCLUDE_DIRS})
+if(PNGwriter_FOUND)
+    # tools / executables
+    add_executable(lines2png
+        include/rmlab/renderer/lines2png.cpp
+    )
+
+    set_property(TARGET lines2png PROPERTY CXX_STANDARD 14)
+    target_link_libraries(lines2png PRIVATE
+        Rmlab
+        ${PNGwriter_LIBRARIES}
+    )
+    target_include_directories(lines2png SYSTEM PRIVATE ${PNGwriter_INCLUDE_DIRS})
+else()
+    message(STATUS "PNGwriter NOT found! lines2png will not be build!")
+endif()
 
 
 # Warnings ####################################################################
