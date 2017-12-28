@@ -19,10 +19,10 @@ Only process files that you can trust with it!
 
 ## Install
 
-![Spack Package](https://img.shields.io/badge/spack.io-rmlab-brightgreen.svg)
-![Conan Package](https://img.shields.io/badge/conan.io-notyet-brightgreen.svg)
-![Conda Package](https://img.shields.io/badge/conda.io-notyet-brightgreen.svg)
-![Docker Image](https://img.shields.io/badge/docker-notyet-brightgreen.svg)
+[![Spack Package](https://img.shields.io/badge/spack-rmlab-brightgreen.svg)](https://spack.io)
+[![Conan Package](https://img.shields.io/badge/conan-notyet-yellow.svg)](https://conan.io)
+[![Conda Package](https://img.shields.io/badge/conda-notyet-yellow.svg)](https://conda.io)
+[![Docker Image](https://img.shields.io/badge/docker-notyet-yellow.svg)](https://docker.io)
 
 If one of the popular user-level package managers above is not already satisfying your needs, install from source via:
 
