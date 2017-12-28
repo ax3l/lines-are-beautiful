@@ -22,6 +22,7 @@ install:
   - if [ $WITH_PNG -eq 0 ]; then
       git clone --depth 50 https://github.com/pngwriter/pngwriter.git &&
       mkdir pngwriter/build &&
+      cd pngwriter/build &&
       cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
       make &&
       make install;
