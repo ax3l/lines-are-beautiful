@@ -45,8 +45,11 @@ This is a small example implementing a renderer for PNG while changing the brush
 
 ```bash
 # without the ".lines" file ending!
-lines2png $HOME/.local/share/remarkable/xochitl/f434bd89-64ec-4071-ad75-806e5a951d93
+lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
+# create a test.png in the current directory
 ```
+
+Try it on your own files inside `$HOME/.local/share/remarkable/xochitl/` :-)
 
 ## Usage API
 
@@ -65,12 +68,12 @@ target_link_libraries(YourTarget PRIVATE Rmlab::Rmlab)
 
 In your C++ files:
 ```C++
-#include <lab/lab.hpp>
+#include <rmlab/rmlab.hpp>
 #include <iostream>
 
 // ...
 
-rmlab::Notebook myNotebook("share/lab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc");
+rmlab::Notebook myNotebook("share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc");
 
 for( auto & page : myNotebook.pages )
     for( auto & layer : page.layers )
