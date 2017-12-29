@@ -12,7 +12,7 @@ Only process files that you can trust with it!
 
 ## Dependencies
 
-- A C++14 capable compiler such as
+- A C++11 capable compiler such as
   - GCC 6.0+
   - Clang 3.9+ (tested)
 - CMake 3.7+

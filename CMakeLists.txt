@@ -40,7 +40,7 @@ target_include_directories(Rmlab PUBLIC
     $<BUILD_INTERFACE:${Rmlab_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
-set_target_properties(Rmlab PROPERTIES CXX_STANDARD 14)
+set_target_properties(Rmlab PROPERTIES CXX_STANDARD 11)
 
 
 # Dependencies ################################################################
@@ -58,7 +58,7 @@ if(PNGwriter_FOUND)
         include/rmlab/renderer/lines2png.cpp
     )
 
-    set_property(TARGET lines2png PROPERTY CXX_STANDARD 14)
+    set_property(TARGET lines2png PROPERTY CXX_STANDARD 11)
     target_link_libraries(lines2png PRIVATE
         Rmlab
         ${PNGwriter_LIBRARIES}

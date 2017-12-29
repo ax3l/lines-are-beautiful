@@ -16,7 +16,7 @@ env:
     - WITH_PNG=0
     - WITH_PNG=1
   global:
-    - CXXFLAGS="-std=c++14"
+    - CXXFLAGS="-std=c++11"
 
 install:
   - if [ $WITH_PNG -eq 0 ]; then
