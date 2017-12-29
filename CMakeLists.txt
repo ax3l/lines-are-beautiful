@@ -64,6 +64,8 @@ if(PNGwriter_FOUND)
         ${PNGwriter_LIBRARIES}
     )
     target_include_directories(lines2png SYSTEM PRIVATE ${PNGwriter_INCLUDE_DIRS})
+
+    set(Rmlab_EXTRA_TARGETS lines2png)
 else()
     message(STATUS "PNGwriter NOT found! lines2png will not be build!")
 endif()
@@ -93,7 +95,7 @@ endif()
 # Installs ####################################################################
 #
 # headers, libraries and exectuables
-install(TARGETS Rmlab EXPORT RmlabTargets
+install(TARGETS Rmlab ${Rmlab_EXTRA_TARGETS} EXPORT RmlabTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
