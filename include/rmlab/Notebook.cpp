@@ -24,7 +24,9 @@
 #include "Line.hpp"
 #include "Point.hpp"
 
+#include <fstream>
 #include <iostream>
+
 
 namespace rmlab
 {
@@ -124,11 +126,11 @@ namespace detail
     }
 }
 
-    Notebook::Notebook( std::string const filename ) :
-        npages( 0 )
+    Notebook::Notebook( std::string const openFilename ) :
+        npages( 0 ), filename( openFilename )
     {
         std::cout << "Opening file: " << filename + std::string( ".lines" ) << std::endl;
-        fstream = std::ifstream(
+        std::ifstream fstream(
             filename + std::string( ".lines" ),
             std::ios::binary
         );
@@ -155,10 +157,11 @@ namespace detail
 
             pages.emplace_back( curPage );
         }
+        
+        fstream.close();
     }
 
     Notebook::~Notebook()
     {
-        fstream.close();
     }
 }

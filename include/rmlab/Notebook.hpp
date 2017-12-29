@@ -21,7 +21,6 @@
 
 #include <cstdint>  // int8_t - int64_t
 #include <string>
-#include <fstream>
 #include <list>
 
 #include "Page.hpp"
@@ -35,11 +34,11 @@ namespace rmlab
         int32_t npages;
         
         // meta
-        std::ifstream fstream;
+        std::string filename;
         std::list< Page > pages;
 
         Notebook() = delete;
-        Notebook( std::string const filename );
+        Notebook( std::string const openFilename );
         ~Notebook();
     };
 }
