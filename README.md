@@ -16,6 +16,7 @@ Only process files that you can trust with it!
   - GCC 6.0+
   - Clang 3.9+ (tested)
 - CMake 3.7+
+- [PNGwriter](https://github.com/pngwriter/pngwriter) (optional for png converts)
 
 ## Install
 
