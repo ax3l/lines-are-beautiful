@@ -25,7 +25,7 @@ install:
       cd pngwriter/build &&
       cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
       make &&
-      make install;
+      sudo make install;
     fi
 
 script:
@@ -33,7 +33,7 @@ script:
   - cd build
   - cmake ..
   - make
-  - make install
+  - sudo make install
   # run created tools
   - cd ..
   - if [ $WITH_PNG -eq 0 ]; then
