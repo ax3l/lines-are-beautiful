@@ -29,8 +29,8 @@ install:
     fi
 
 script:
-  - mkdir build
-  - cd build
+  - mkdir $TRAVIS_BUILD_DIR/build
+  - cd $TRAVIS_BUILD_DIR/build
   - cmake ..
   - make
   - sudo make install
