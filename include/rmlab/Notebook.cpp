@@ -1,8 +1,4 @@
-#include "Notebook.hpp"
-
-#include "Page.hpp"
-#include "Layer.hpp"
-/* Copyright 2017 Axel Huebl
+/* Copyright 2017-2018 Axel Huebl
  *
  * This file is part of lines-are-beautiful.
  *
@@ -21,6 +17,9 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "Notebook.hpp"
+#include "Page.hpp"
+#include "Layer.hpp"
 #include "Line.hpp"
 #include "Point.hpp"
 
