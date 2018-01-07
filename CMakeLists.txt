@@ -23,9 +23,47 @@ cmake_minimum_required(VERSION 3.7)
 
 project(Rmlab VERSION 0.1.0)
 
-#HACK!
+# HACK! PNGwriter has no proper Config.cmake yet
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake-tmp/)
+
+# Options and Variants ########################################################
+#
+function(rmlab_option name description default)
+    set(Rmlab_USE_${name} ${default} CACHE STRING "${description}")
+    set_property(CACHE Rmlab_USE_${name} PROPERTY
+        STRINGS "ON;TRUE;AUTO;OFF;FALSE"
+    )
+    if(Rmlab_HAVE_${name})
+        set(Rmlab_HAVE_${name} TRUE)
+    else()
+        set(Rmlab_HAVE_${name})
+    endif()
+    set(Rmlab_CONFIG_OPTIONS ${Rmlab_CONFIG_OPTIONS} ${name} PARENT_SCOPE)
+endfunction()
+
+rmlab_option(PNG "Enable support for PNG conversion" AUTO)
+
+# TODO: add defines via configure to installed header files
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING
+        "Choose the build type, e.g. Debug." FORCE)
+endif()
+
+
+# Dependencies ################################################################
+#
+if(Rmlab_USE_PNG STREQUAL AUTO)
+    find_package(PNGwriter)
+elseif(Rmlab_USE_PNG)
+    find_package(PNGwriter REQUIRED)
+endif()
+
+if(PNGwriter_FOUND)
+    set(Rmlab_HAVE_PNG TRUE)
+endif()
+
 
 # Targets #####################################################################
 #
@@ -35,6 +73,9 @@ add_library(Rmlab
     include/rmlab/Notebook.cpp
 )
 
+if(NOT WIN32)
+    target_link_libraries(Rmlab PUBLIC m)
+endif()
 target_include_directories(Rmlab PUBLIC
     $<BUILD_INTERFACE:${Rmlab_BINARY_DIR}/include>
     $<BUILD_INTERFACE:${Rmlab_SOURCE_DIR}/include>
@@ -42,17 +83,8 @@ target_include_directories(Rmlab PUBLIC
 )
 set_target_properties(Rmlab PROPERTIES CXX_STANDARD 11)
 
-
-# Dependencies ################################################################
-#
-
-if(NOT WIN32)
-    target_link_libraries(Rmlab PUBLIC m)
-endif()
-
-find_package(PNGwriter)
-
-if(PNGwriter_FOUND)
+# CLI tools
+if(Rmlab_HAVE_PNG)
     # tools / executables
     add_executable(lines2png
         include/rmlab/renderer/lines2png.cpp
@@ -92,6 +124,15 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "PGI")
 endif()
 
 
+# Patch Files with Options ####################################################
+#
+configure_file(
+    ${Rmlab_SOURCE_DIR}/RmlabConfig.cmake.in
+    ${Rmlab_BINARY_DIR}/RmlabConfig.cmake
+    @ONLY
+)
+
+
 # Installs ####################################################################
 #
 # headers, libraries and exectuables
@@ -107,7 +148,7 @@ install(EXPORT RmlabTargets
     NAMESPACE Rmlab::
     DESTINATION lib/cmake/Rmlab
 )
-install(FILES "RmlabConfig.cmake" "RmlabConfig.cmake"
+install(FILES ${Rmlab_BINARY_DIR}/RmlabConfig.cmake
     DESTINATION lib/cmake/Rmlab
 )
 
@@ -121,3 +162,27 @@ install(FILES "RmlabConfig.cmake" "RmlabConfig.cmake"
 #
 # TODO
 
+
+# Status Message for Build Options ############################################
+#
+message("")
+message("Rmlab build configuration:")
+message("  Rmlab Version: ${Rmlab_VERSION}")
+message("  C++ Compiler : ${CMAKE_CXX_COMPILER_ID} "
+                         "${CMAKE_CXX_COMPILER_VERSION} "
+                         "${CMAKE_CXX_COMPILER_WRAPPER}")
+message("    ${CMAKE_CXX_COMPILER}")
+message("")
+message("  Installation prefix: ${CMAKE_INSTALL_PREFIX}")
+message("")
+message("  Build Type: ${CMAKE_BUILD_TYPE}")
+message("  Build Options:")
+
+foreach(opt IN LISTS Rmlab_CONFIG_OPTIONS)
+  if(${Rmlab_HAVE_${opt}})
+    message("    ${opt}: ON")
+  else()
+    message("    ${opt}: OFF")
+  endif()
+endforeach()
+message("")
