@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.7)
 
 # public dependencies in CMake package
 include(CMakeFindDependencyMacro)
-if(NOT WIN32)
-    find_dependency(m)
-endif()
+#if(NOT WIN32)
+#    find_dependency(m)
+#endif()
 set(Rmlab_HAVE_PNG @Rmlab_HAVE_PNG@)
 if(Rmlab_HAVE_PNG)
   find_dependency(PNGwriter)
