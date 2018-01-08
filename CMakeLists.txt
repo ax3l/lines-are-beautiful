@@ -74,7 +74,7 @@ add_library(Rmlab
 )
 
 if(NOT WIN32)
-    target_link_libraries(Rmlab PUBLIC m)
+    target_link_libraries(Rmlab PRIVATE m)
 endif()
 target_include_directories(Rmlab PUBLIC
     $<BUILD_INTERFACE:${Rmlab_BINARY_DIR}/include>
@@ -147,6 +147,10 @@ install(TARGETS Rmlab ${Rmlab_EXTRA_TARGETS} EXPORT RmlabTargets
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
+)
+install(
+    DIRECTORY include/
+    DESTINATION include
 )
 # CMake package file for find_package(Rmlab::Rmlab) in depending projects
 install(EXPORT RmlabTargets
