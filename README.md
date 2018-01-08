@@ -42,8 +42,13 @@ git clone https://github.com/ax3l/lines-are-beautiful.git
 mkdir lines-are-beautiful/build
 cd lines-are-beautiful/build
 
-cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+# for own install prefix append: -DCMAKE_INSTALL_PREFIX=$HOME/somepath
+cmake ..
+
 make -j
+
+# optional
+make test
 
 # optional
 sudo make install
