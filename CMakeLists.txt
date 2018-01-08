@@ -21,7 +21,7 @@
 
 cmake_minimum_required(VERSION 3.7)
 
-project(Rmlab VERSION 0.1.0)
+project(Rmlab VERSION 0.1.0 LANGUAGES CXX)
 
 # HACK! PNGwriter has no proper Config.cmake yet
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
