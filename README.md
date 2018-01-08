@@ -16,7 +16,7 @@ Only process files that you can trust with it!
   - GCC 6.0+
   - Clang 3.9+ (tested)
 - CMake 3.7+
-- [PNGwriter](https://github.com/pngwriter/pngwriter) (optional for png converts)
+- [PNGwriter](https://github.com/pngwriter/pngwriter) (optional for png converts; extend environment variable `CMAKE_PREFIX_PATH` with its install location)
 
 ## Install
 
@@ -24,6 +24,15 @@ Only process files that you can trust with it!
 [![Conan Package](https://img.shields.io/badge/conan-notyet-yellow.svg)](https://conan.io)
 [![Conda Package](https://img.shields.io/badge/conda-notyet-yellow.svg)](https://conda.io)
 [![Docker Image](https://img.shields.io/badge/docker-notyet-yellow.svg)](https://docker.io)
+
+### Spack
+
+```bash
+spack install rmlab
+spack load rmlab
+```
+
+### From Source
 
 If one of the popular user-level package managers above is not already satisfying your needs, install from source via:
 
@@ -47,7 +56,7 @@ This is a small example implementing a renderer for PNG while changing the brush
 ```bash
 # without the ".lines" file ending!
 lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
-# create a test.png in the current directory
+#   creates file "test.png" in the current directory
 ```
 
 Try it on your own files inside `$HOME/.local/share/remarkable/xochitl/` :-)
@@ -91,6 +100,9 @@ Blog articles
 
 - [general](https://plasma.ninja/blog/devices/remarkable/2017/12/18/reMarkable-exporation.html)
 - [file format](https://plasma.ninja/blog/devices/remarkable/binary/format/2017/12/26/reMarkable-lines-file-format.html)
+- 5' talk at 34C3:
+  - [slides](https://plasma.ninja/34c3/reMarkable_binary_format.pdf)
+  - [video](https://media.ccc.de/v/34c3-9257-lightning_talks_day_3#t=1405) (around minute 23+)
 
 ## Disclaimer
 
