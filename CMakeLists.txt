@@ -124,12 +124,12 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "PGI")
 endif()
 
 
-# Patch Files with Options ####################################################
+# Generate Files with Configuration Options ###################################
 #
 configure_file(
-    ${Rmlab_SOURCE_DIR}/RmlabConfig.cmake.in
+    ${Rmlab_SOURCE_DIR}/RmlabConfig.cmake
     ${Rmlab_BINARY_DIR}/RmlabConfig.cmake
-    @ONLY
+    COPYONLY
 )
 
 include(CMakePackageConfigHelpers)
