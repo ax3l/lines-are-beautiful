@@ -132,6 +132,12 @@ configure_file(
     @ONLY
 )
 
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file("RmlabConfigVersion.cmake"
+    VERSION ${Rmlab_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
 
 # Installs ####################################################################
 #
@@ -148,7 +154,10 @@ install(EXPORT RmlabTargets
     NAMESPACE Rmlab::
     DESTINATION lib/cmake/Rmlab
 )
-install(FILES ${Rmlab_BINARY_DIR}/RmlabConfig.cmake
+install(
+    FILES
+        ${Rmlab_BINARY_DIR}/RmlabConfig.cmake
+        ${Rmlab_BINARY_DIR}/RmlabConfigVersion.cmake
     DESTINATION lib/cmake/Rmlab
 )
 
