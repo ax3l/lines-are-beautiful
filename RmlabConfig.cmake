@@ -3,6 +3,6 @@
 #include(CMakeFindDependencyMacro)
 #find_dependency(SomeLib 1.2.3)
 
-include("${CMAKE_CURRENT_LIST_DIR/RmlabTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/RmlabTargets.cmake")
 
 # if necessary, add COMPONENTS here
