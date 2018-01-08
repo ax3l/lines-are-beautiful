@@ -173,7 +173,12 @@ install(
 
 # Tests #######################################################################
 #
-# TODO
+enable_testing()
+if(Rmlab_HAVE_PNG)
+    add_test(NAME Convert.PNG
+        COMMAND lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
+    )
+endif()
 
 
 # Status Message for Build Options ############################################
