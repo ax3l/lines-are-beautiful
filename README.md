@@ -50,7 +50,7 @@ make -j
 # optional
 make test
 
-# optional
+# sudo is only required for system paths
 sudo make install
 ```
 

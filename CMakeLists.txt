@@ -103,33 +103,12 @@ else()
 endif()
 
 
-# Warnings ####################################################################
-#
-# GNU
-if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow")
-# Clang
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow")
-# ICC
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow")
-# PGI
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "PGI")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Minform=inform")
-endif()
-
-
 # Generate Files with Configuration Options ###################################
 #
 configure_file(
-    ${Rmlab_SOURCE_DIR}/RmlabConfig.cmake
+    ${Rmlab_SOURCE_DIR}/RmlabConfig.cmake.in
     ${Rmlab_BINARY_DIR}/RmlabConfig.cmake
-    COPYONLY
+    @ONLY
 )
 
 include(CMakePackageConfigHelpers)
