@@ -6,12 +6,15 @@ set(Rmlab_HAVE_PNG @Rmlab_HAVE_PNG@)
 if(Rmlab_HAVE_PNG)
     find_dependency(PNGwriter)
 endif()
-set(PNG_LIBRARY "")
-set(PNG_DEFINITIONS ${Rmlab_HAVE_PNG})
+set(Rmlab_PNG_FOUND ${Rmlab_HAVE_PNG})
 
 include("${CMAKE_CURRENT_LIST_DIR}/RmlabTargets.cmake")
 
 # check if components are fulfilled and set Rmlab_<COMPONENT>_FOUND vars
-check_required_components(
-    PNG
-)
+foreach(comp ${Rmlab_FIND_COMPONENTS})
+    if(NOT Rmlab_${comp}_FOUND)
+        if(Rmlab_FIND_REQUIRED_${comp})
+            set(Rmlab_FOUND FALSE)
+        endif()
+    endif()
+endforeach()
