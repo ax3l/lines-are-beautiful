@@ -54,12 +54,12 @@ main(
         {
             for( auto & line : layer.lines )
             {
-                float lx( 0. );
-                float ly( 0. );
+                // float lx( 0. );
+                // float ly( 0. );
                 for( auto & point : line.points )
                 {
-                    float dx = point.x - lx;
-                    float dy = point.y - ly;
+                    // float dx = point.x - lx;
+                    // float dy = point.y - ly;
 
                     for( int x = int(point.x); x < int(point.x) + 20; ++x )
                     {
@@ -77,8 +77,8 @@ main(
                             );
                         }
                     }
-                    lx = point.x;
-                    ly = point.y;
+                    // lx = point.x;
+                    // ly = point.y;
                 }
             }
         }
