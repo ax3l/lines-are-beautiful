@@ -78,6 +78,7 @@ export CMAKE_PREFIX_PATH=/your/path/to/installed/path:$CMAKE_PREFIX_PATH
 
 Add to your `CMakeLists.txt`:
 ```cmake
+# supports: COMPONENTS PNG
 find_package(Rmlab 0.1.0)
 
 target_link_libraries(YourTarget PRIVATE Rmlab::Rmlab)
