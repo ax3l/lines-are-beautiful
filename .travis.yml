@@ -19,7 +19,7 @@ env:
     - CXXFLAGS="-std=c++11 -Wall -Wextra -Wshadow -Werror"
 
 install:
-  - if [ $WITH_PNG -eq 0 ]; then
+  - if [ $WITH_PNG -eq 1 ]; then
       git clone --depth 50 https://github.com/pngwriter/pngwriter.git &&
       mkdir pngwriter/build &&
       cd pngwriter/build &&
@@ -37,6 +37,6 @@ script:
   - sudo make install
   # run created tools
   - cd ..
-  - if [ $WITH_PNG -eq 0 ]; then
+  - if [ $WITH_PNG -eq 1 ]; then
       lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc;
     fi
