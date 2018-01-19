@@ -42,7 +42,10 @@ namespace Brushes
         // other
         brush = 0u,         // GUI: 3 "brush"
         highlighter = 5u,   // GUI: 5 (always color 0)
-        unknown_brush = 6u  // not in the GUI yet
+        // not a line
+        rubber = 6u,        // GUI: 6-1 "eraser"
+        unknown_brush = 7u, // ? maybe "clear page" or "select"?
+        rubber_area = 8u    // GUI: 6-2 "area eraser"
     };
 }
 namespace Colors
