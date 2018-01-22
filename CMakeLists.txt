@@ -52,9 +52,9 @@ endif()
 # Dependencies ################################################################
 #
 if(Rmlab_USE_PNG STREQUAL AUTO)
-    find_package(PNGwriter 0.7.0)
+    find_package(PNGwriter 0.7.0 CONFIG)
 elseif(Rmlab_USE_PNG)
-    find_package(PNGwriter 0.7.0 REQUIRED)
+    find_package(PNGwriter 0.7.0 REQUIRED CONFIG)
 endif()
 
 if(PNGwriter_FOUND)
