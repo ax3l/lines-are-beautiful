@@ -23,9 +23,6 @@ cmake_minimum_required(VERSION 3.7)
 
 project(Rmlab VERSION 0.1.0 LANGUAGES CXX)
 
-# HACK! PNGwriter has no proper Config.cmake yet
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake-tmp/)
 
 # Options and Variants ########################################################
 #
@@ -55,9 +52,9 @@ endif()
 # Dependencies ################################################################
 #
 if(Rmlab_USE_PNG STREQUAL AUTO)
-    find_package(PNGwriter)
+    find_package(PNGwriter 0.7.0)
 elseif(Rmlab_USE_PNG)
-    find_package(PNGwriter REQUIRED)
+    find_package(PNGwriter 0.7.0 REQUIRED)
 endif()
 
 if(PNGwriter_FOUND)
@@ -93,9 +90,8 @@ if(Rmlab_HAVE_PNG)
     set_property(TARGET lines2png PROPERTY CXX_STANDARD 11)
     target_link_libraries(lines2png PRIVATE
         Rmlab
-        ${PNGwriter_LIBRARIES}
+        PNGwriter::PNGwriter
     )
-    target_include_directories(lines2png SYSTEM PRIVATE ${PNGwriter_INCLUDE_DIRS})
 
     set(Rmlab_EXTRA_TARGETS lines2png)
 else()
