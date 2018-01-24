@@ -13,10 +13,11 @@ Only process files that you can trust with it!
 ## Dependencies
 
 - A C++11 capable compiler such as
-  - GCC 6.0+
+  - GCC 5.0+
   - Clang 3.9+ (tested)
 - CMake 3.7+
-- [PNGwriter](https://github.com/pngwriter/pngwriter) (optional for png converts; extend environment variable `CMAKE_PREFIX_PATH` with its install location)
+- [PNGwriter 0.7.0+](https://github.com/pngwriter/pngwriter)
+  (optional for png converts; extend environment variable `CMAKE_PREFIX_PATH` with its install location)
 
 ## Install
 
@@ -78,8 +79,8 @@ export CMAKE_PREFIX_PATH=/your/path/to/installed/path:$CMAKE_PREFIX_PATH
 
 Add to your `CMakeLists.txt`:
 ```cmake
-# supports: COMPONENTS PNG
-find_package(Rmlab 0.1.0)
+# supports:                     COMPONENTS PNG
+find_package(Rmlab 0.1.0 CONFIG)
 
 target_link_libraries(YourTarget PRIVATE Rmlab::Rmlab)
 ```
