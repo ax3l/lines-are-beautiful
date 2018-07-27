@@ -2,7 +2,7 @@
  *
  * This file is part of lines-are-beautiful.
  *
- * lines-are-beautiful is free software: you can edistribute it and/or modify
+ * lines-are-beautiful is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -17,6 +17,11 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @file
+ * Definition of notebooks.
+ */
+
 #pragma once
 
 #include <cstdint>  // int8_t - int64_t
@@ -28,16 +33,38 @@
 
 namespace rmlab
 {
+    /**
+     * Base unit of the reMarkable note-taking system, used similarly
+     * to a real-world notebook. It is made up of a set of pages.
+     *
+     * @see rmlab::Page
+     */
     struct Notebook
     {
-        // .lines info
+        /**
+         * Number of pages in this notebook.
+         */
         int32_t npages;
-        
-        // meta
+
+        /**
+         * Path to the binary file containing from which the notebook
+         * has been read.
+         */
         std::string filename;
+
+        /**
+         * All the pages of this notebook.
+         */
         std::list< Page > pages;
 
         Notebook() = delete;
+
+        /**
+         * Open a notebook.
+         *
+         * @param openFilename Path to the file containing the notebook
+         * data following the `.lines` format.
+         */
         Notebook( std::string const openFilename );
         ~Notebook();
     };

@@ -1,0 +1,8 @@
+PROJECT_NAME = lines-are-beautiful
+PROJECT_NUMBER = 0.0
+PROJECT_BRIEF = "A C++ file API for the reMarkable e-ink tablet"
+
+INPUT = include/rmlab
+
+OUTPUT_DIRECTORY = docs
+RECURSIVE = YES

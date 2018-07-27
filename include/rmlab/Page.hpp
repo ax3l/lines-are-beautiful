@@ -2,7 +2,7 @@
  *
  * This file is part of lines-are-beautiful.
  *
- * lines-are-beautiful is free software: you can edistribute it and/or modify
+ * lines-are-beautiful is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -17,6 +17,11 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @file
+ * Definition of pages.
+ */
+
 #pragma once
 
 #include "Layer.hpp"
@@ -27,13 +32,26 @@
 
 namespace rmlab
 {
+    /**
+     * Element of a notebook, containing a stack of layers.
+     *
+     * The layers at the top of the stack (or at the end of the list) are
+     * rendered last, meaning that they will appear above others.
+     *
+     * @see rmlab::Notebook
+     * @see rmlab::Layer
+     */
     struct Page
     {
-        // .lines info
+        /**
+         * Number of layers in this page.
+         */
         int32_t nlayers;
 
-        // meta
-        // current page no.
+        /**
+         * All the layers of this page, from the bottom to the top of the
+         * layer stack.
+         */
         std::list< Layer > layers;
     };
 }
