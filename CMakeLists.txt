@@ -40,6 +40,11 @@ function(rmlab_option name description default)
 endfunction()
 
 rmlab_option(PNG "Enable support for PNG conversion" AUTO)
+option(Rmlab_ENABLE_LOGGING "Log debugging information to standard error")
+
+if(Rmlab_ENABLE_LOGGING)
+    add_definitions(-DRMLAB_ENABLE_LOGGING)
+endif()
 
 # TODO: add defines via configure to installed header files
 
