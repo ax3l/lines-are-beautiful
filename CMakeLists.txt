@@ -80,9 +80,16 @@ target_include_directories(Rmlab PUBLIC
 )
 set_target_properties(Rmlab PROPERTIES CXX_STANDARD 11)
 
-# CLI tools
+# CLI tools / executables
+add_executable(lineDemo
+    include/rmlab/writer/lineDemo.cpp
+)
+set_property(TARGET lineDemo PROPERTY CXX_STANDARD 11)
+target_link_libraries(lineDemo PRIVATE
+    Rmlab
+)
+set(Rmlab_EXTRA_TARGETS lineDemo)
 if(Rmlab_HAVE_PNG)
-    # tools / executables
     add_executable(lines2png
         include/rmlab/renderer/lines2png.cpp
     )
