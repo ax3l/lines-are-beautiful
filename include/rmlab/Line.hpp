@@ -40,12 +40,12 @@ namespace Brushes
         pencil_sharp = 7u,  // GUI: 2-1 "sharp pencil"
         pencil_tilt = 1u,   // GUI: 2-2 "tilt pencil"
         // other
-        brush = 0u,         // GUI: 3 "brush"
-        highlighter = 5u,   // GUI: 5 (always color 0)
+        brush = 0u,         // GUI: 3 "paintbrush"
+        highlighter = 5u,   // GUI: 4 (always color 0)
         // not a line
-        rubber = 6u,        // GUI: 6-1 "eraser"
-        unknown_brush = 7u, // ? maybe "clear page" or "select"?
-        rubber_area = 8u    // GUI: 6-2 "area eraser"
+        rubber = 6u,        // GUI: 5-1 "eraser"
+        unknown_brush = 7u, // maybe GUI 6: "selection tool"?
+        rubber_area = 8u    // GUI: 5-2 "erase selection"
     };
 }
 namespace Colors
