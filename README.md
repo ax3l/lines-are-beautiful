@@ -1,7 +1,8 @@
 # Lines Are Beautiful
 
 [![Build Status develop](https://img.shields.io/travis/ax3l/lines-are-beautiful/develop.svg?label=develop)](https://travis-ci.org/ax3l/lines-are-beautiful/branches)
-[![Documentation Status](https://readthedocs.org/projects/rmlab/badge/?version=latest)](http://rmlab.readthedocs.io)
+[![Doxygen Docs](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://ax3l.github.io/lines-are-beautiful/)
+[![Manual Status](https://readthedocs.org/projects/rmlab/badge/?version=latest)](http://rmlab.readthedocs.io)
 [![Language](https://img.shields.io/badge/language-C%2B%2B11-orange.svg)](https://isocpp.org)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
@@ -85,7 +86,7 @@ find_package(Rmlab 0.1.0 CONFIG)
 target_link_libraries(YourTarget PRIVATE Rmlab::Rmlab)
 ```
 
-In your C++ files:
+In your C++ files (see [Doxygen](https://ax3l.github.io/lines-are-beautiful/)):
 ```C++
 #include <rmlab/rmlab.hpp>
 #include <iostream>
