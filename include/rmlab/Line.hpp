@@ -77,4 +77,23 @@ namespace BaseSizes
         // meta
         std::list< Point > points;
     };
+
+    inline Line make_line(
+        int32_t brush_type = 1,
+        int32_t color = 0,
+        int32_t unknown_line_attribute = 0,
+        float brush_base_size = 2.125,
+        std::list< Point > points = std::list< Point >{}
+    )
+    {
+        Line newLine;
+        newLine.brush_type = brush_type;
+        newLine.color = color;
+        newLine.unknown_line_attribute = unknown_line_attribute;
+        newLine.brush_base_size = brush_base_size;
+        newLine.npoints = points.size();
+        newLine.points = points;
+
+        return newLine;
+    }
 }

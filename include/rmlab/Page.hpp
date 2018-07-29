@@ -36,4 +36,13 @@ namespace rmlab
         // current page no.
         std::list< Layer > layers;
     };
+
+    inline Page make_page( std::list< Layer > layers = std::list< Layer >{} )
+    {
+        Page newPage;
+        newPage.nlayers = layers.size();
+        newPage.layers = layers;
+
+        return newPage;
+    }
 }

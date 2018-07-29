@@ -34,7 +34,7 @@ main(
     if( argc != 2 )
     {
         std::cerr << "Usage: " << argv[0] << " path/to/filePrefix" << std::endl;
-        return 1.0;
+        return 1;
     }
 
     rmlab::Notebook myNotebook( argv[1] );

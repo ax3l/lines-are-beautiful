@@ -37,8 +37,10 @@ namespace rmlab
         std::string filename;
         std::list< Page > pages;
 
-        Notebook() = delete;
+        Notebook();
         Notebook( std::string const openFilename );
         ~Notebook();
+
+        void save( std::string const saveFilename );
     };
 }

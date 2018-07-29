@@ -37,4 +37,13 @@ namespace rmlab
         // is this layer visible
         std::list< Line > lines;
     };
+
+    inline Layer make_layer( std::list< Line > lines = std::list< Line >{} )
+    {
+        Layer newLayer;
+        newLayer.nlines = lines.size();
+        newLayer.lines = lines;
+
+        return newLayer;
+    }
 }

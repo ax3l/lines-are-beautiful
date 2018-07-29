@@ -50,4 +50,21 @@ namespace ranges
         float rotX;
         float rotY;
     };
+
+    inline Point make_point(
+        float x,
+        float y,
+        float pressure,
+        float rotX,
+        float rotY
+    )
+    {
+        Point newPoint;
+        newPoint.x = x;
+        newPoint.y = y;
+        newPoint.pressure = pressure;
+        newPoint.rotX = rotX;
+        newPoint.rotY = rotY;
+        return newPoint;
+    }
 }

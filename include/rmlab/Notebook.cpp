@@ -160,7 +160,74 @@ namespace detail
         fstream.close();
     }
 
+    Notebook::Notebook() :
+        npages( 0 )
+    {
+    }
+
     Notebook::~Notebook()
     {
+    }
+
+    void Notebook::save( std::string const saveFilename )
+    {
+        std::cout << "Saving to file: " << saveFilename + std::string( ".lines" )
+                  << std::endl;
+        std::ofstream fstream(
+            saveFilename + std::string( ".lines" ),
+            std::fstream::out | std::ios::binary
+        );
+
+        // write header (43 bytes)
+        fstream.write( "reMarkable lines with selections and layers", 43 );
+
+        // pages
+        npages = pages.size();
+        fstream.write(
+            (char*)&npages,
+            sizeof(int32_t)
+        );
+
+        for( auto & page : pages )
+        {
+            // layers
+            int32_t nlayers = page.layers.size();
+            fstream.write( (char*)&nlayers, sizeof(int32_t) );
+            for( auto & layer : page.layers )
+            {
+                // lines
+                int32_t nlines = layer.lines.size();
+                fstream.write( (char*)&nlines, sizeof(int32_t) );
+                for( auto & line : layer.lines )
+                {
+                    int32_t brush_type = line.brush_type;
+                    fstream.write( (char*)&brush_type, sizeof(int32_t) );
+
+                    int32_t color = line.color;
+                    fstream.write( (char*)&color, sizeof(int32_t) );
+
+                    int32_t unknown_line_attribute = line.unknown_line_attribute;
+                    fstream.write( (char*)&unknown_line_attribute, sizeof(int32_t) );
+
+                    float brush_base_size = line.brush_base_size;
+                    fstream.write( (char*)&brush_base_size, sizeof(float) );
+
+                    // points
+                    int32_t npoints = line.points.size();
+                    fstream.write( (char*)&npoints, sizeof(int32_t) );
+                    for( auto & point : line.points )
+                    {
+                        fstream.write( (char*)&point.x, sizeof(float) );
+                        fstream.write( (char*)&point.y, sizeof(float) );
+
+                        fstream.write( (char*)&point.pressure, sizeof(float) );
+                        fstream.write( (char*)&point.rotX, sizeof(float) );
+                        fstream.write( (char*)&point.rotY, sizeof(float) );
+                    }
+                }
+            }
+        }
+
+        fstream.close();
     }
 }
