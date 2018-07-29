@@ -32,5 +32,8 @@ bin/*
 # build dir
 build/
 
+# docs dir
+docs/
+
 # temporary files
 *~
