@@ -86,6 +86,13 @@ find_package(Rmlab 0.1.0 CONFIG)
 target_link_libraries(YourTarget PRIVATE Rmlab::Rmlab)
 ```
 
+*Alternatively*, add whole repository directly to your project and add it via:
+```cmake
+add_subdirectory("path/to/source/of/lines-are-beautiful")
+
+target_link_libraries(YourTarget PRIVATE Rmlab::Rmlab)
+```
+
 In your C++ files (see [Doxygen](https://ax3l.github.io/lines-are-beautiful/)):
 ```C++
 #include <rmlab/rmlab.hpp>

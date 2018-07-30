@@ -69,6 +69,7 @@ endif()
 add_library(Rmlab
     include/rmlab/Notebook.cpp
 )
+add_library(Rmlab::Rmlab ALIAS Rmlab)
 
 if(NOT WIN32)
     target_link_libraries(Rmlab PRIVATE m)
