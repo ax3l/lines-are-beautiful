@@ -14,7 +14,7 @@ Only process files that you can trust with it!
 ## Dependencies
 
 - A C++11 capable compiler such as
-  - GCC 5.0+
+  - GCC 4.8+ (tested)
   - Clang 3.9+ (tested)
 - CMake 3.7+
 - [PNGwriter 0.7.0+](https://github.com/pngwriter/pngwriter)
