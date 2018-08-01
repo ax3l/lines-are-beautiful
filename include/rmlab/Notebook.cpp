@@ -26,12 +26,6 @@
 #include <fstream>
 #include <iostream>
 
-#ifdef RMLAB_ENABLE_LOGGING
-#define LOG(arg) (std::cerr << arg)
-#else
-#define LOG(arg)
-#endif
-
 
 namespace rmlab
 {
@@ -47,8 +41,6 @@ namespace detail
 
         fstream.read( (char*)&curPoint.x, sizeof(float) );
         fstream.read( (char*)&curPoint.y, sizeof(float) );
-        LOG( "              coords: " << curPoint.x << ", "
-                << curPoint.y << '\n' );
 
         // pressure and rotation of the pen to page normal
         // rotation: for centrially symmetric brushes as now, one attribute
@@ -60,9 +52,6 @@ namespace detail
         fstream.read( (char*)&curPoint.rotX, sizeof(float) );
         // range [-pi/2:pi/2]
         fstream.read( (char*)&curPoint.rotY, sizeof(float) );
-        LOG( "            pressure: " << curPoint.pressure << '\n' );
-        LOG( "       rot to X axis: " << curPoint.rotX << '\n' );
-        LOG( "       rot to Y axis: " << curPoint.rotY << '\n' );
 
         curLine.points.emplace_back( curPoint );
     }
@@ -84,27 +73,20 @@ namespace detail
         // select 4:   5 (marker/highlighter: always color 0)
         // what is/was 6? :-)
         fstream.read( (char*)&curLine.brush_type, sizeof(int32_t) );
-        LOG( "      brush type:  " << curLine.brush_type << '\n' );
 
         // color (0: black, 1: grey, 2: white)
         fstream.read( (char*)&curLine.color, sizeof(int32_t) );
-        LOG( "      color int32: " << curLine.color << '\n' );
 
         // unknown 4 Byte (int32_t?), always zero?
         // non-stored information about "selected" lines?
         fstream.read( (char*)&curLine.unknown_line_attribute, sizeof(int32_t) );
-        LOG( "      magic 4byte:  " << curLine.unknown_line_attribute << '\n' );
 
         // brush base size: 1.875, 2.0, 2.125
         fstream.read( (char*)&curLine.brush_base_size, sizeof(float) );
-        LOG( "      brush size:  " << curLine.brush_base_size << '\n' );
-
         fstream.read( (char*)&curLine.npoints, sizeof(int32_t) );
-        LOG( "      no. points: " << curLine.npoints << '\n' );
 
         for( int n = 0; n < curLine.npoints; ++n )
         {
-            LOG( "      point " << n << " --------------------\n" );
             readPoint( fstream, curLine );
         }
 
@@ -119,11 +101,9 @@ namespace detail
     {
         Layer curLayer;
         fstream.read( (char*)&curLayer.nlines, sizeof(int32_t) );
-        LOG( "    no.of lines: " << curLayer.nlines << '\n' );
 
         for( int nl = 0; nl < curLayer.nlines; ++nl )
         {
-            LOG( "    line " << nl << " ---------------------\n" );
             readLine( fstream, curLayer );
         }
 
@@ -135,27 +115,20 @@ namespace detail
         npages( 0 ), filename( openFilename )
     {
         std::string fullname = filename + ".lines";
-
-        LOG( "Opening file: " << fullname << '\n' );
         std::ifstream fstream( fullname, std::ios::binary );
 
         // skip header
         fstream.seekg( 43, fstream.beg );
-
         fstream.read( (char*)&npages, sizeof(int32_t) );
-        LOG( "no. of pages: " << npages << '\n' );
 
         for( int p = 0; p < npages; ++p )
         {
-            LOG( "page " << p << " -------------------------\n" );
             // layers
             Page curPage;
             fstream.read( (char*)&curPage.nlayers, sizeof(int32_t) );
-            LOG( "  no. of layers: " << curPage.nlayers << '\n' );
 
             for( int nlay = 0; nlay < curPage.nlayers; ++nlay )
             {
-                LOG( "  layer " << nlay << " ----------------------\n" );
                 detail::readLayer( fstream, curPage );
             }
 
