@@ -1,4 +1,4 @@
-/* Copyright 2017-2018 Axel Huebl
+/* Copyright 2017-2018 Axel Huebl, Matteo Delabre
  *
  * This file is part of lines-are-beautiful.
  *
