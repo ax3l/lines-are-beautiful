@@ -237,7 +237,7 @@ void render_layer(
     // masks and opening the SVG groups. Prepare a reversed stack to
     // later close the groups.
     std::stack< RenderGroup > close_groups;
-    std::size_t mask_id = 0;
+    std::size_t mask_id = 0u;
 
     while( !open_groups.empty() )
     {
@@ -298,7 +298,7 @@ void render_page( const rmlab::Page& page, std::ostream& out )
     out << "version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" ";
     out << "xmlns:xlink=\"http://www.w3.org/1999/xlink\">";
 
-    std::size_t layer_id = 0;
+    std::size_t layer_id = 0u;
 
     for( const auto & layer : page.layers )
     {
@@ -323,7 +323,7 @@ main(
     }
 
     rmlab::Notebook myNotebook( argv[1] );
-    std::size_t page_id = 0;
+    std::size_t page_id = 0u;
 
     for( const auto & page : myNotebook.pages )
     {
