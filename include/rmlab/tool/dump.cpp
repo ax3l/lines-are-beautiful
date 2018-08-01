@@ -1,4 +1,4 @@
-/* Copyright 2017-2018 Axel Huebl
+/* Copyright 2017-2018 Axel Huebl, Matteo Delabre
  *
  * This file is part of lines-are-beautiful.
  *
@@ -39,7 +39,7 @@ main(
     rmlab::Notebook notebook( argv[1] );
 
     std::cout << "no. of pages: " << notebook.pages.size() << '\n';
-    std::size_t page_id = 0;
+    std::size_t page_id = 0u;
 
     for( const auto & page : notebook.pages )
     {
@@ -47,7 +47,7 @@ main(
                   << " -------------------------\n"
                   << "  no. of layers: " << page.layers.size() << '\n';
 
-        std::size_t layer_id = 0;
+        std::size_t layer_id = 0u;
 
         for( const auto & layer : page.layers )
         {
@@ -55,7 +55,7 @@ main(
                       << " ----------------------\n"
                       << "    no. of lines: " << layer.lines.size() << '\n';
 
-            std::size_t line_id = 0;
+            std::size_t line_id = 0u;
 
             for( const auto & line : layer.lines )
             {
@@ -64,23 +64,23 @@ main(
                           << "      brush type: " << line.brush_type << '\n'
                           << "      color int32: " << line.color << '\n'
                           << "      magic 4byte: "
-                                << line.unknown_line_attribute << '\n'
+                          << line.unknown_line_attribute << '\n'
                           << "      brush size: "
-                                << line.brush_base_size << '\n'
+                          << line.brush_base_size << '\n'
                           << "      no. points: " << line.points.size() << '\n';
 
-                std::size_t point_id = 0;
+                std::size_t point_id = 0u;
 
                 for( const auto & point : line.points )
                 {
                     std::cout << "      point " << point_id
                               << " --------------------\n"
                               << "        coords: "
-                                    << point.x << ", " << point.y << '\n'
+                              << point.x << ", " << point.y << '\n'
                               << "        pressure: " << point.pressure << '\n'
                               << "        rot to X axis: " << point.rotX << '\n'
                               << "        rot to Y axis: "
-                                    << point.rotY << '\n';
+                              << point.rotY << '\n';
 
                     ++point_id;
                 }
@@ -93,4 +93,6 @@ main(
 
         ++page_id;
     }
+
+    return 0;
 }
