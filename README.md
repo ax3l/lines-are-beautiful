@@ -58,6 +58,11 @@ sudo make install
 
 ## Usage CLI
 
+_Lines Are Beautiful_ comes with several tools to handle files produced by the tablet.
+Try them on your own files inside `$HOME/.local/share/remarkable/xochitl/` :-)
+
+### PNG renderer
+
 This is a small example implementing a renderer for PNG while changing the brush type.
 
 ```bash
@@ -66,9 +71,27 @@ lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
 #   creates file "test.png" in the current directory
 ```
 
-Try it on your own files inside `$HOME/.local/share/remarkable/xochitl/` :-)
-
 Note: this tool depends on an installed [PNGwriter](https://github.com/pngwriter/pngwriter) dependency.
+
+### SVG renderer
+
+This notebook renderer creates a set of SVG files, one for each page. Implementation status:
+
+* [x] Basic strokes.
+* [x] Initial brush size.
+* [x] Brush color.
+* [x] Highlighter.
+* [x] Normal eraser.
+* [x] Region eraser.
+* [x] Layers.
+* [ ] Brush size variation based on pressure/tilt.
+* [ ] Brush texture.
+
+```bash
+# without the ".lines" file ending!
+lines2svg share/rmlab/examples/e09e6bd4-3647-41e7-98be-b9c3b53d80c8
+#   creates files "test-0.svg", "test-1.svg", ... in the current directory
+```
 
 ## Usage API
 
