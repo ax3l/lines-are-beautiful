@@ -223,7 +223,7 @@ void render_layer(
                 // some erasures, because this new stroke should not be
                 // affected by the previous erasures; so, we create a new group.
                 open_groups.push( std::move( current ) );
-                current = RenderGroup{};
+                current = RenderGroup();
             }
 
             current.strokes.push_back( line );
