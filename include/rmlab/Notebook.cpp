@@ -149,8 +149,6 @@ namespace detail
 
     void Notebook::save( std::string const saveFilename )
     {
-        std::cout << "Saving to file: " << saveFilename + std::string( ".lines" )
-                  << std::endl;
         std::ofstream fstream(
             saveFilename + std::string( ".lines" ),
             std::fstream::out | std::ios::binary
