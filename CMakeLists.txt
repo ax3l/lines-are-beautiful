@@ -2,7 +2,7 @@
 #
 # This file is part of lines-are-beautiful.
 #
-# lines-are-beautiful is free software: you can edistribute it and/or modify
+# lines-are-beautiful is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -106,6 +106,14 @@ else()
     message(STATUS "PNGwriter NOT found! lines2png will not be build!")
 endif()
 
+add_executable(lines2svg
+    include/rmlab/renderer/lines2svg.cpp
+)
+
+set_property(TARGET lines2svg PROPERTY CXX_STANDARD 11)
+target_link_libraries(lines2svg PRIVATE Rmlab)
+
+set(Rmlab_EXTRA_TARGETS ${Rmlab_EXTRA_TARGETS} lines2svg)
 
 # Generate Files with Configuration Options ###################################
 #
