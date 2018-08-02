@@ -112,8 +112,14 @@ add_executable(lines2svg
 
 set_property(TARGET lines2svg PROPERTY CXX_STANDARD 11)
 target_link_libraries(lines2svg PRIVATE Rmlab)
+list(APPEND Rmlab_EXTRA_TARGETS lines2svg)
 
-set(Rmlab_EXTRA_TARGETS ${Rmlab_EXTRA_TARGETS} lines2svg)
+add_executable(dump
+    include/rmlab/tool/dump.cpp
+)
+set_property(TARGET dump PROPERTY CXX_STANDARD 11)
+target_link_libraries(dump PRIVATE Rmlab)
+list(APPEND Rmlab_EXTRA_TARGETS dump)
 
 # Generate Files with Configuration Options ###################################
 #
