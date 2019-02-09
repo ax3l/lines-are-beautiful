@@ -173,7 +173,8 @@ install(
 enable_testing()
 if(Rmlab_HAVE_PNG)
     add_test(NAME Convert.PNG
-        COMMAND lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
+        COMMAND lines2png
+          ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
     )
 endif()
 
