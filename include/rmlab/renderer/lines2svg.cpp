@@ -319,12 +319,18 @@ main(
     if( argc != 2 )
     {
         std::cerr << "Usage: " << argv[0] << " path/to/filePrefix" << std::endl;
-        return 1.0;
+        return 1;
     }
 
     rmlab::Notebook myNotebook( argv[1] );
-    std::size_t page_id = 0u;
 
+    if( myNotebook.pages.size() == 0 )
+    {
+        std::cerr << "File opening failed!" << std::endl;
+        return 2;
+    }
+
+    std::size_t page_id = 0u;
     for( const auto & page : myNotebook.pages )
     {
         std::ostringstream page_filename;

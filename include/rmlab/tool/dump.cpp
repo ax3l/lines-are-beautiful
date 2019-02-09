@@ -38,6 +38,12 @@ main(
 
     rmlab::Notebook notebook( argv[1] );
 
+    if( notebook.pages.size() == 0 )
+    {
+        std::cerr << "File opening failed!" << std::endl;
+        return 2;
+    }
+
     std::cout << "no. of pages: " << notebook.pages.size() << '\n';
     std::size_t page_id = 0u;
 
