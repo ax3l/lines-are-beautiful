@@ -82,14 +82,25 @@ target_include_directories(Rmlab PUBLIC
 
 target_compile_features(Rmlab PUBLIC cxx_std_17)
 
+# std::filesystem
+# TODO uh oh, how does this look in Win
+# TODO uh oh, on OSX libc++ is likely the default for clang
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_link_libraries(Rmlab PRIVATE stdc++fs)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    if(CMAKE_CXX_FLAGS MATCHES ".*libc\\+\\+.*")
+        target_link_libraries(Rmlab PRIVATE c++fs)
+    else()
+        target_link_libraries(Rmlab PRIVATE stdc++fs)
+    endif()
+endif()
+
 # CLI tools / executables
 add_executable(lineDemo
     include/rmlab/writer/lineDemo.cpp
 )
 target_compile_features(lineDemo PUBLIC cxx_std_17)
-target_link_libraries(lineDemo PRIVATE
-    Rmlab
-)
+target_link_libraries(lineDemo PRIVATE Rmlab)
 set(Rmlab_EXTRA_TARGETS lineDemo)
 if(Rmlab_HAVE_PNG)
     add_executable(lines2png
@@ -175,16 +186,16 @@ enable_testing()
 if(Rmlab_HAVE_PNG)
     add_test(NAME Convert.PNG
         COMMAND lines2png
-        ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+        ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
     )
 endif()
 add_test(NAME Convert.SVG
     COMMAND lines2svg
-    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
 )
 add_test(NAME Convert.Dump
     COMMAND dump
-    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
 )
 
 

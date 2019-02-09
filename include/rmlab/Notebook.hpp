@@ -52,10 +52,9 @@ namespace rmlab
         int32_t npages;
 
         /**
-         * Path to the binary file containing from which the notebook
-         * has been read.
+         * Path ending in a uuid directory containing the notebook.
          */
-        std::string filename;
+        std::string pathUUID;
 
         /**
          * All the pages of this notebook.
@@ -70,12 +69,11 @@ namespace rmlab
         /**
          * Open a notebook.
          *
-         * @param openFilename Path to the file containing the notebook
-         * data following the `.lines` format.
+         * @param openPathUUID path to the UUID-named directory containing the notebook.
          */
-        Notebook( std::string const openFilename );
+        Notebook( std::string const openPathUUID );
         ~Notebook();
 
-        void save( std::string const saveFilename );
+        void save( std::string const path );
     };
 }

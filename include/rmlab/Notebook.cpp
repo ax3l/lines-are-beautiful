@@ -25,7 +25,9 @@
 
 #include <fstream>
 #include <iostream>
+#include <string>
 #include <cstdlib>
+#include <filesystem>
 
 
 namespace rmlab
@@ -112,37 +114,59 @@ namespace detail
     }
 }
 
-    Notebook::Notebook( std::string const openFilename ) :
-        version(3), npages( 0 ), filename( openFilename )
+    Notebook::Notebook( std::string const openPathUUID ) :
+        version(3), npages( 0 ), pathUUID( openPathUUID )
     {
-        std::string fullname = filename + ".rm";
-        std::ifstream fstream( fullname, std::ios::binary | std::ifstream::in );
-        if( !fstream.good() )
+        namespace fs = std::filesystem;
+        fs::path rmPath = openPathUUID;
+        if( ! fs::is_directory( rmPath ) )
         {
-            std::cerr << "File '" << filename
+            std::cerr << "Path '" << openPathUUID
                       << "' not found or not accessible!\n";
             return;
         }
 
-        // skip header
-        fstream.seekg( 32, fstream.beg );
+        for( auto& lsPath: fs::directory_iterator( rmPath ) )
+        {
+            std::cout << lsPath.path().extension() << "\n";
+            if( lsPath.path().extension() != ".rm" )
+                continue;
 
-        // version
-        char str_version;
-        fstream.read( &str_version, sizeof(char) );
-        version = std::atoi( &str_version );
-        if( version != 3 )
-            std::cerr << "WARNING: Unknown version!\n";
+            npages += 1;
+        }
 
-        // skip 10x space padding
-        fstream.seekg( 10, fstream.cur );
-
-        // number of pages (1)
-        // fstream.read( (char*)&npages, sizeof(int32_t) );
-        npages = 1;
+        if( npages == 0 )
+        {
+            std::cerr << "No pages found in '" << openPathUUID
+                      << "'!\n";
+            return;
+        }
 
         for( int p = 0; p < npages; ++p )
         {
+            std::string fullname = rmPath / std::to_string(p);
+            fullname += std::string(".rm");
+            std::ifstream fstream( fullname, std::ios::binary | std::ifstream::in );
+            if( !fstream.good() )
+            {
+                std::cerr << "File '" << fullname
+                          << "' not found or not accessible!\n";
+                return;
+            }
+
+            // skip header
+            fstream.seekg( 32, fstream.beg );
+
+            // version
+            char str_version;
+            fstream.read( &str_version, sizeof(char) );
+            version = std::atoi( &str_version );
+            if( version != 3 )
+                std::cerr << "WARNING: Unknown version!\n";
+
+            // skip 10x space padding
+            fstream.seekg( 10, fstream.cur );
+
             // layers
             Page curPage;
             fstream.read( (char*)&curPage.nlayers, sizeof(int32_t) );
@@ -152,10 +176,11 @@ namespace detail
                 detail::readLayer( fstream, curPage );
             }
 
+            fstream.close();
+
             pages.emplace_back( curPage );
         }
 
-        fstream.close();
     }
 
     Notebook::Notebook() :
@@ -167,28 +192,45 @@ namespace detail
     {
     }
 
-    void Notebook::save( std::string const saveFilename )
+    void Notebook::save( std::string const path )
     {
-        std::ofstream fstream(
-            saveFilename + std::string( ".rm" ),
-            std::fstream::out | std::ios::binary
-        );
+        namespace fs = std::filesystem;
+        fs::path rmPath = path;
 
-        // write header (33 bytes)
-        fstream.write( "reMarkable .lines file, version=3", 33 );
+        bool pathReady = true;
+        if( ! fs::is_directory( rmPath ) )
+            pathReady = fs::create_directories( rmPath );
 
-        // write space padding
-        fstream.write( "          ", 10 );
+        if( !pathReady )
+        {
+            std::cerr << "Patj '" << path
+                      << "' not accessible!\n";
+            return;
+        }
 
-        // pages == 1
-        //npages = pages.size();
-        //fstream.write(
-        //    (char*)&npages,
-        //    sizeof(int32_t)
-        //);
-
+        int p = 0;
         for( auto & page : pages )
         {
+            std::string fullname = rmPath / std::to_string(p);
+            fullname += std::string(".rm");
+            std::ofstream fstream(
+                fullname,
+                std::fstream::out | std::ios::binary
+            );
+
+            if( !fstream.good() )
+            {
+                std::cerr << "File '" << fullname
+                          << "' not accessible!\n";
+                return;
+            }
+
+            // write header (33 bytes)
+            fstream.write( "reMarkable .lines file, version=3", 33 );
+
+            // write space padding
+            fstream.write( "          ", 10 );
+
             // layers
             int32_t nlayers = page.layers.size();
             fstream.write( (char*)&nlayers, sizeof(int32_t) );
@@ -226,8 +268,9 @@ namespace detail
                     }
                 }
             }
-        }
 
-        fstream.close();
+            fstream.close();
+            p++;
+        }
     }
 }
