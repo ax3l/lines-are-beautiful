@@ -77,10 +77,10 @@ main(
                               << " --------------------\n"
                               << "        coords: "
                               << point.x << ", " << point.y << '\n'
-                              << "        pressure: " << point.pressure << '\n'
-                              << "        rot to X axis: " << point.rotX << '\n'
-                              << "        rot to Y axis: "
-                              << point.rotY << '\n';
+                              << "        speed: " << point.speed << '\n'
+                              << "        direction: " << point.direction << '\n'
+                              << "        width: " << point.width << '\n'
+                              << "        pressure: " << point.pressure << '\n';
 
                     ++point_id;
                 }

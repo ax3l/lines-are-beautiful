@@ -25,6 +25,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
 
 
 namespace rmlab
@@ -42,16 +43,16 @@ namespace detail
         fstream.read( (char*)&curPoint.x, sizeof(float) );
         fstream.read( (char*)&curPoint.y, sizeof(float) );
 
+        fstream.read( (char*)&curPoint.speed, sizeof(float) );
+        fstream.read( (char*)&curPoint.direction, sizeof(float) );
+        fstream.read( (char*)&curPoint.width, sizeof(float) );
+
         // pressure and rotation of the pen to page normal
         // rotation: for centrially symmetric brushes as now, one attribute
         //           would be sufficient,
         //           let's add a flat nib, calligraphic pen as conversion target! :)
         // range [0.0:1.0]
         fstream.read( (char*)&curPoint.pressure, sizeof(float) );
-        // range [-pi/2:pi/2]
-        fstream.read( (char*)&curPoint.rotX, sizeof(float) );
-        // range [-pi/2:pi/2]
-        fstream.read( (char*)&curPoint.rotY, sizeof(float) );
 
         curLine.points.emplace_back( curPoint );
     }
@@ -112,14 +113,33 @@ namespace detail
 }
 
     Notebook::Notebook( std::string const openFilename ) :
-        npages( 0 ), filename( openFilename )
+        version(3), npages( 0 ), filename( openFilename )
     {
-        std::string fullname = filename + ".lines";
-        std::ifstream fstream( fullname, std::ios::binary );
+        std::string fullname = filename + ".rm";
+        std::ifstream fstream( fullname, std::ios::binary | std::ifstream::in );
+        if( !fstream.good() )
+        {
+            std::cerr << "File '" << filename
+                      << "' not found or not accessible!\n";
+            return;
+        }
 
         // skip header
-        fstream.seekg( 43, fstream.beg );
-        fstream.read( (char*)&npages, sizeof(int32_t) );
+        fstream.seekg( 32, fstream.beg );
+
+        // version
+        char str_version;
+        fstream.read( &str_version, sizeof(char) );
+        version = std::atoi( &str_version );
+        if( version != 3 )
+            std::cerr << "WARNING: Unknown version!\n";
+
+        // skip 10x space padding
+        fstream.seekg( 10, fstream.cur );
+
+        // number of pages (1)
+        // fstream.read( (char*)&npages, sizeof(int32_t) );
+        npages = 1;
 
         for( int p = 0; p < npages; ++p )
         {
@@ -150,19 +170,22 @@ namespace detail
     void Notebook::save( std::string const saveFilename )
     {
         std::ofstream fstream(
-            saveFilename + std::string( ".lines" ),
+            saveFilename + std::string( ".rm" ),
             std::fstream::out | std::ios::binary
         );
 
-        // write header (43 bytes)
-        fstream.write( "reMarkable lines with selections and layers", 43 );
+        // write header (33 bytes)
+        fstream.write( "reMarkable .lines file, version=3", 33 );
 
-        // pages
-        npages = pages.size();
-        fstream.write(
-            (char*)&npages,
-            sizeof(int32_t)
-        );
+        // write space padding
+        fstream.write( "          ", 10 );
+
+        // pages == 1
+        //npages = pages.size();
+        //fstream.write(
+        //    (char*)&npages,
+        //    sizeof(int32_t)
+        //);
 
         for( auto & page : pages )
         {
@@ -196,9 +219,10 @@ namespace detail
                         fstream.write( (char*)&point.x, sizeof(float) );
                         fstream.write( (char*)&point.y, sizeof(float) );
 
+                        fstream.write( (char*)&point.speed, sizeof(float) );
+                        fstream.write( (char*)&point.direction, sizeof(float) );
+                        fstream.write( (char*)&point.width, sizeof(float) );
                         fstream.write( (char*)&point.pressure, sizeof(float) );
-                        fstream.write( (char*)&point.rotX, sizeof(float) );
-                        fstream.write( (char*)&point.rotY, sizeof(float) );
                     }
                 }
             }
