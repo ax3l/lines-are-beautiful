@@ -1,12 +1,12 @@
 {
     "deleted": false,
-    "lastModified": "1514482305801",
-    "metadatamodified": true,
-    "modified": true,
-    "parent": "",
+    "lastModified": "1540978943000",
+    "metadatamodified": false,
+    "modified": false,
+    "parent": "13c61499-94ec-4986-98b0-618b1b3b8286",
     "pinned": false,
-    "synced": false,
+    "synced": true,
     "type": "DocumentType",
-    "version": 74,
+    "version": 97,
     "visibleName": "Test line"
 }
