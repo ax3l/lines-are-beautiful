@@ -1,4 +1,4 @@
-# Copyright 2017 Axel Huebl
+# Copyright 2017-2019 Axel Huebl
 #
 # This file is part of lines-are-beautiful.
 #
@@ -19,7 +19,7 @@
 # Preamble ####################################################################
 #
 
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.8)
 
 project(Rmlab VERSION 0.1.0 LANGUAGES CXX)
 
@@ -79,13 +79,14 @@ target_include_directories(Rmlab PUBLIC
     $<BUILD_INTERFACE:${Rmlab_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
-set_target_properties(Rmlab PROPERTIES CXX_STANDARD 11)
+
+target_compile_features(Rmlab PUBLIC cxx_std_17)
 
 # CLI tools / executables
 add_executable(lineDemo
     include/rmlab/writer/lineDemo.cpp
 )
-set_property(TARGET lineDemo PROPERTY CXX_STANDARD 11)
+target_compile_features(lineDemo PUBLIC cxx_std_17)
 target_link_libraries(lineDemo PRIVATE
     Rmlab
 )
@@ -95,7 +96,7 @@ if(Rmlab_HAVE_PNG)
         include/rmlab/renderer/lines2png.cpp
     )
 
-    set_property(TARGET lines2png PROPERTY CXX_STANDARD 11)
+    target_compile_features(lines2png PUBLIC cxx_std_17)
     target_link_libraries(lines2png PRIVATE
         Rmlab
         PNGwriter::PNGwriter
@@ -110,14 +111,14 @@ add_executable(lines2svg
     include/rmlab/renderer/lines2svg.cpp
 )
 
-set_property(TARGET lines2svg PROPERTY CXX_STANDARD 11)
+target_compile_features(lines2svg PUBLIC cxx_std_17)
 target_link_libraries(lines2svg PRIVATE Rmlab)
 list(APPEND Rmlab_EXTRA_TARGETS lines2svg)
 
 add_executable(dump
     include/rmlab/tool/dump.cpp
 )
-set_property(TARGET dump PROPERTY CXX_STANDARD 11)
+target_compile_features(dump PUBLIC cxx_std_17)
 target_link_libraries(dump PRIVATE Rmlab)
 list(APPEND Rmlab_EXTRA_TARGETS dump)
 
@@ -174,9 +175,17 @@ enable_testing()
 if(Rmlab_HAVE_PNG)
     add_test(NAME Convert.PNG
         COMMAND lines2png
-          ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+        ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
     )
 endif()
+add_test(NAME Convert.SVG
+    COMMAND lines2svg
+    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+)
+add_test(NAME Convert.Dump
+    COMMAND dump
+    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+)
 
 
 # Status Message for Build Options ############################################

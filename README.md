@@ -3,7 +3,7 @@
 [![Build Status develop](https://img.shields.io/travis/ax3l/lines-are-beautiful/develop.svg?label=develop)](https://travis-ci.org/ax3l/lines-are-beautiful/branches)
 [![Doxygen Docs](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://ax3l.github.io/lines-are-beautiful/)
 [![Manual Status](https://readthedocs.org/projects/rmlab/badge/?version=latest)](http://rmlab.readthedocs.io)
-[![Language](https://img.shields.io/badge/language-C%2B%2B11-orange.svg)](https://isocpp.org)
+[![Language](https://img.shields.io/badge/language-C%2B%2B17-orange.svg)](https://isocpp.org)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 A C++ file API for the [reMarkable e-ink tablet](https://remarkable.com).
@@ -13,10 +13,10 @@ Only process files that you can trust with it!
 
 ## Dependencies
 
-- A C++11 capable compiler such as
-  - GCC 4.8+ (tested)
-  - Clang 3.9+ (tested)
-- CMake 3.7+
+- A C++17 capable compiler such as
+  - GCC 8+ (tested)
+  - Clang 7+ (tested)
+- CMake 3.8+
 - [PNGwriter 0.7.0+](https://github.com/pngwriter/pngwriter)
   (optional for png converts; extend environment variable `CMAKE_PREFIX_PATH` with its install location)
 

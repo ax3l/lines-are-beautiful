@@ -1,15 +1,25 @@
 language: cpp
 
 sudo: false
-dist: trusty
+dist: xenial
+
+cache:
+  apt: true
+  pip: true
 
 compiler:
   - gcc
   - clang
 
-cache:
-  apt: true
-  pip: true
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-xenial-7
+    packages:
+      - gcc-8
+      - g++-8
+      - clang-7
 
 env:
   matrix:
@@ -17,6 +27,17 @@ env:
     - WITH_PNG=1
   global:
     - CXXFLAGS="-std=c++11 -Wall -Wextra -Wshadow -Werror"
+
+before_install:
+  - echo "CC=${CC} CXX=${CXX}"
+  - if [ ${CC} == "gcc" ]; then
+      export CC=gcc-8;
+      export CXX=g++-8;
+    elif [ ${CC} == "clang" ]; then
+      export CC=clang-7;
+      export CXX=clang++;
+    fi
+  - echo "CC=${CC} CXX=${CXX}"
 
 install:
   - if [ $WITH_PNG -eq 1 ]; then
@@ -35,11 +56,3 @@ script:
   - make
   - CTEST_OUTPUT_ON_FAILURE=1 make test
   - sudo make install
-  # run created tools
-  - cd ..
-  - if [ $WITH_PNG -eq 1 ]; then
-      for p in {0..4};
-      do
-        lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/$p;
-      done
-    fi
