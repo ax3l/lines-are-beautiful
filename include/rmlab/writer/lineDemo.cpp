@@ -56,9 +56,10 @@ main(
         auto point = rmlab::make_point(
             float(x), // 0:1404
             200.f,    // 0:1872
-            1.0f,     // pressure, range [0.0:1.0]
-            M_PI / 2.0,     // rotX, range [-pi/2:pi/2]
-            M_PI / 2.0      // rotY range [-pi/2:pi/2]
+            0.5f,     // speed
+            0.5f,     // direction
+            0.5f,     // width
+            1.0f      // pressure, range [0.0:1.0]
         );
         line1.points.emplace_back( point );
     }
@@ -67,9 +68,10 @@ main(
         auto point2 = rmlab::make_point(
             float(x), // 0:1404
             300.f,    // 0:1872
-            1.0f,     // pressure, range [0.0:1.0]
-            M_PI / 2.0,     // rotX, range [-pi/2:pi/2]
-            M_PI / 2.0      // rotY range [-pi/2:pi/2]
+            0.5f,     // speed
+            0.5f,     // direction
+            0.5f,     // width
+            1.0f      // pressure, range [0.0:1.0]
         );
         line2.points.emplace_back( point2 );
     }
@@ -78,9 +80,10 @@ main(
         auto point3 = rmlab::make_point(
             float(x), // 0:1404
             400.f,    // 0:1872
-            1.0f,     // pressure, range [0.0:1.0]
-            M_PI / 2.0,     // rotX, range [-pi/2:pi/2]
-            M_PI / 2.0      // rotY range [-pi/2:pi/2]
+            0.5f,     // speed
+            0.5f,     // direction
+            0.5f,     // width
+            1.0f      // pressure, range [0.0:1.0]
         );
         line3.points.emplace_back( point3 );
     }

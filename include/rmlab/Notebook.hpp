@@ -42,6 +42,11 @@ namespace rmlab
     struct Notebook
     {
         /**
+         * Version of the file format in this notebook.
+         */
+        int32_t version;
+
+        /**
          * Number of pages in this notebook.
          */
         int32_t npages;

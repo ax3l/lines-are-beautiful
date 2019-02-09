@@ -72,14 +72,14 @@ namespace ranges
     constexpr float maxP = 1.0;
 
     /**
-     * Minimum rotation value of the pen, in radians.
+     * Minimum direction value of the pen, in radians.
      */
-    constexpr float minRot = -M_PI / 2.0;
+    constexpr float minDir = 0.0;
 
     /**
      * Maximum rotation value of the pen, in radians.
      */
-    constexpr float maxRot =  M_PI / 2.0;
+    constexpr float maxDir = M_PI * 2.0;
 }
 
     /**
@@ -105,41 +105,46 @@ namespace ranges
         float y;
 
         /**
+         * Speed
+         */
+        float speed;
+
+        /**
+         * Direction
+         * Range likely between rmlab::ranges::Coords::minDir and
+         * rmlab::ranges::Coords::maxDir.
+         */
+        float direction;
+
+        /**
+         * Width
+         */
+        float width;
+
+        /**
          * Pressure that was being applied on the screen with the pen when
          * this point was sampled. This value is comprised between
          * rmlab::ranges::minP and rmlab::ranges::maxP.
          */
         float pressure;
-
-        /**
-         * Rotation of the pen around the X axis when this point was sampled.
-         * This rotation is expressed in radians and comprised between
-         * rmlab::ranges::minRot and rmlab::ranges::maxRot.
-         */
-        float rotX;
-
-        /**
-         * Rotation of the pen around the Y axis when this point was sampled.
-         * This rotation is expressed in radians and comprised between
-         * rmlab::ranges::minRot and rmlab::ranges::maxRot.
-         */
-        float rotY;
     };
 
     inline Point make_point(
         float x,
         float y,
-        float pressure,
-        float rotX,
-        float rotY
+        float speed,
+        float direction,
+        float width,
+        float pressure
     )
     {
         Point newPoint;
         newPoint.x = x;
         newPoint.y = y;
+        newPoint.speed = speed;
+        newPoint.direction = direction;
+        newPoint.width = width;
         newPoint.pressure = pressure;
-        newPoint.rotX = rotX;
-        newPoint.rotY = rotY;
         return newPoint;
     }
 }

@@ -38,7 +38,13 @@ main(
     }
 
     rmlab::Notebook myNotebook( argv[1] );
-    
+
+    if( myNotebook.pages.size() == 0 )
+    {
+        std::cerr << "File opening failed!" << std::endl;
+        return 2;
+    }
+
     // draw png
     
     pngwriter png(
