@@ -68,6 +68,7 @@ endif()
 # libraries
 add_library(Rmlab
     include/rmlab/Notebook.cpp
+    include/rmlab/auxiliary/Filesystem.cpp
 )
 add_library(Rmlab::Rmlab ALIAS Rmlab)
 
