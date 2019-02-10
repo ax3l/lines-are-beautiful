@@ -68,6 +68,7 @@ endif()
 # libraries
 add_library(Rmlab
     include/rmlab/Notebook.cpp
+    include/rmlab/auxiliary/Filesystem.cpp
 )
 add_library(Rmlab::Rmlab ALIAS Rmlab)
 
@@ -174,16 +175,16 @@ enable_testing()
 if(Rmlab_HAVE_PNG)
     add_test(NAME Convert.PNG
         COMMAND lines2png
-        ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+        ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
     )
 endif()
 add_test(NAME Convert.SVG
     COMMAND lines2svg
-    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
 )
 add_test(NAME Convert.Dump
     COMMAND dump
-    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
+    ${Rmlab_SOURCE_DIR}/share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
 )
 
 # Status Message for Build Options ############################################
