@@ -134,13 +134,20 @@ for( auto & page : myNotebook.pages )
 
 ## Resources
 
-Blog articles
+### Blog Articles, Talks
 
 - [general](https://plasma.ninja/blog/devices/remarkable/2017/12/18/reMarkable-exporation.html)
 - [file format](https://plasma.ninja/blog/devices/remarkable/binary/format/2017/12/26/reMarkable-lines-file-format.html)
-- 5' talk at 34C3:
+- 5' talk at *34C3* [en]:
   - [slides](https://plasma.ninja/34c3/reMarkable_binary_format.pdf)
   - [video](https://media.ccc.de/v/34c3-9257-lightning_talks_day_3#t=1405) (around minute 23+)
+- talk at *Datenspuren 2018* [de]:
+  - [slides](https://plasma.ninja/ds18/reMarkable_binary_format_ds18.pdf)
+  - [video](https://media.ccc.de/v/DS2018-9324-freeing_the_binary_format_of_the_remarkable_e-ink_tablet)
+
+### Experimental Implementation in Rust
+
+- every C++ programmer likes to learn Rust: [lines-are-rusty](https://github.com/ax3l/lines-are-rusty)
 
 ## Disclaimer
 
