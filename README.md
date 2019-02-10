@@ -66,9 +66,9 @@ Try them on your own files inside `$HOME/.local/share/remarkable/xochitl/` :-)
 This is a small example implementing a renderer for PNG while changing the brush type.
 
 ```bash
-# without the ".rm" file ending!
-lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc/0
-#   creates file "test.png" in the current directory
+# path to the directory containing the notebook
+lines2png share/rmlab/examples/aa90b0e7-5c1a-42fe-930f-dad9cf3363cc
+#   creates files "test-0.png", "test-1.png", ... per page in the current directory
 ```
 
 Note: this tool depends on an installed [PNGwriter](https://github.com/pngwriter/pngwriter) dependency.
@@ -88,9 +88,9 @@ This notebook renderer creates a set of SVG files, one for each page. Implementa
 * [ ] Brush texture.
 
 ```bash
-# without the ".rm" file ending!
-lines2svg share/rmlab/examples/e09e6bd4-3647-41e7-98be-b9c3b53d80c8/0
-#   creates files "test-0.svg", "test-1.svg", ... in the current directory
+# path to the directory containing the notebook
+lines2svg share/rmlab/examples/e09e6bd4-3647-41e7-98be-b9c3b53d80c8
+#   creates files "test-0.svg", "test-1.svg", ... per page in the current directory
 ```
 
 ## Usage API
